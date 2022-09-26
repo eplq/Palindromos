@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react"
 
 function checkPalindrome(string: string): boolean {
-    return string.toLowerCase() === string.toLowerCase().split("").reverse().join("")
+
+    const filteredString = string
+        .replaceAll(/[\s,.!\-;:()]/g, "") // retiramos los signos de puntuación
+        .replaceAll("á", "a")
+        .replaceAll("é", "e")
+        .replaceAll("í", "i")
+        .replaceAll("ó", "o")
+        .replaceAll("ú", "u")
+
+    return filteredString.toLowerCase() === filteredString.toLowerCase().split("").reverse().join("")
 }
 
 export default function usePalindrome(): [string, string, React.Dispatch<React.SetStateAction<string>>, boolean] {
