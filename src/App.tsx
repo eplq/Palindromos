@@ -1,34 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { FormEvent } from "react"
+import usePalindrome from "./usePalindrome"
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    const [text, reversed, setText, isPalindrome] = usePalindrome()
+
+    return (
+        <div className="w-screen bg-gradient-to-br from-blue-800 to-yellow-800 flex justify-center">
+            <main className="min-h-screen w-3/4 md:w-1/2 lg:w-1/3 flex flex-col justify-evenly items-center">
+                <textarea
+                    className="bg-transparent border-none outline-none w-10/12 text-3xl h-1/ text-neutral-200 placeholder:text-center placeholder:text-neutral-500"
+                    defaultValue={text}
+                    placeholder="Amor a Roma"
+                    autoFocus
+                    onInput={(ev: FormEvent<HTMLTextAreaElement>) => setText(ev.currentTarget.value)} />
+
+                <span className={`text-3xl w-10/12 break-all text-center ${isPalindrome ? "text-lime-300" : "text-red-300"}`}>{reversed}</span>
+            </main>
+        </div>
+    )
 }
 
 export default App
